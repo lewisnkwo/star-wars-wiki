@@ -44,7 +44,9 @@ const CharacterProfile = ({
           </p>
           {character.starships.length > 0 &&
             character.starships.map((starship) => (
-              <a href={starship}>{starship}</a>
+              <span>
+                <a href={starship}>{starship}</a>
+              </span>
             ))}
           <hr />
           {/* replace with a star icon */}
