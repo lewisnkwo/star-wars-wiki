@@ -20,15 +20,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route
-              path="/favourites"
-              element={
-                <FavouriteCharacters
-                  settings={{}}
-                  updateCharacterSettings={() => {}}
-                />
-              }
-            />
+            <Route path="/favourites" element={<FavouriteCharacters />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
