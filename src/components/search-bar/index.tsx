@@ -1,23 +1,37 @@
 import { useState } from "react";
+import { SearchResource } from "../../types";
 
 export interface Props {
-  placeholder: string;
-  onSubmit: (searchTerm: string) => void;
+  onSubmit: (searchTerm: string, searchResource: SearchResource) => void;
   isLoading: boolean;
 }
 
-const SearchBar = ({ placeholder, onSubmit, isLoading }: Props) => {
+const SearchBar = ({ onSubmit, isLoading }: Props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchResource, setSearchResource] = useState<
+    SearchResource | undefined
+  >(undefined);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit(searchTerm);
+        if (searchResource !== undefined) onSubmit(searchTerm, searchResource);
       }}
     >
+      <select
+        name="Search category"
+        onChange={(e) =>
+          setSearchResource(e.currentTarget.value as SearchResource)
+        }
+      >
+        <option value="people">People</option>
+        <option value="planets">Planets</option>
+        <option value="starships">Starships</option>
+      </select>
       <input
-        placeholder={placeholder}
+        name="Search query"
+        placeholder="Search for characters, planets and starships..."
         onChange={(e) => setSearchTerm(e.currentTarget.value)}
         disabled={isLoading}
         value={searchTerm}

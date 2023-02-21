@@ -62,3 +62,5 @@ export interface Starship {
   edited: string;
   url: string;
 }
+
+export type SearchResource = "people" | "planets" | "starships";
