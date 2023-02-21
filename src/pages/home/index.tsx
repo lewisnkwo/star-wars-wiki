@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Character, Settings } from "../../types";
+import { Character } from "../../types";
 import { Button, Card, Col, Row } from "react-bootstrap";
+import { CharacterSettingsContext } from "../../character-settings";
 
 const Home = () => {
   const navigate = useNavigate();
   const [characters, setCharacters] = useState<Character[] | undefined>(
     undefined
   );
-  const [characterSettings, setCharacterSettings] = useState<Settings>({});
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const characterSettingsContext = useContext(CharacterSettingsContext);
 
   useEffect(() => {
     setError(false);
@@ -48,26 +50,36 @@ const Home = () => {
                   <Button
                     variant="outline-info"
                     onClick={() => {
-                      setCharacterSettings({
-                        ...characterSettings,
-                        ...(!characterSettings[c.name]
-                          ? {
-                              [c.name]: {
-                                isFavourite: true,
-                              },
-                            }
-                          : {
-                              [c.name]: {
-                                ...characterSettings[c.name],
-                                isFavourite:
-                                  !characterSettings[c.name].isFavourite,
-                              },
-                            }),
-                      });
+                      if (characterSettingsContext !== undefined) {
+                        characterSettingsContext.setCharacterSettings({
+                          ...characterSettingsContext.characterSettings,
+                          ...(!characterSettingsContext.characterSettings[
+                            c.name
+                          ]
+                            ? {
+                                [c.name]: {
+                                  isFavourite: true,
+                                },
+                              }
+                            : {
+                                [c.name]: {
+                                  ...characterSettingsContext.characterSettings[
+                                    c.name
+                                  ],
+                                  isFavourite:
+                                    !characterSettingsContext.characterSettings[
+                                      c.name
+                                    ].isFavourite,
+                                },
+                              }),
+                        });
+                      }
                     }}
                   >
-                    {characterSettings[c.name] &&
-                    characterSettings[c.name]?.isFavourite === true
+                    {characterSettingsContext !== undefined &&
+                    characterSettingsContext.characterSettings[c.name] &&
+                    characterSettingsContext.characterSettings[c.name]
+                      ?.isFavourite === true
                       ? "Unfavourite"
                       : "Favourite"}
                   </Button>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import { Outlet } from "react-router-dom";
 import NavBar from "./components/nav-bar";
 import SearchResults from "./components/search-results";
-import Home from "./pages/home";
-import { Character, Planet, Starship, SearchResource } from "./types";
+import { Character, Planet, SearchResource, Starship } from "./types";
+import "./App.css";
 
-function App() {
+const App = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResource, setSearchResource] = useState<
     SearchResource | undefined
@@ -57,7 +57,7 @@ function App() {
   }, [searchTerm, searchResource]);
 
   return (
-    <div className="App">
+    <>
       <NavBar
         onSubmit={(term, resource) => {
           setSearchTerm(term);
@@ -71,12 +71,13 @@ function App() {
           setStarships(undefined);
         }}
       />
+
       <main>
         {searching && <span>Searching...</span>}
         {error && (
           <span>Oops! Something went wrong while searching the wiki.</span>
         )}
-        {hasSearchResults ? (
+        {hasSearchResults && (
           <>
             <h2>Search results:</h2>
             <SearchResults
@@ -84,13 +85,13 @@ function App() {
               planets={planets}
               starships={starships}
             />
+            <hr />
           </>
-        ) : (
-          <Home />
         )}
+        <Outlet />
       </main>
-    </div>
+    </>
   );
-}
+};
 
 export default App;
