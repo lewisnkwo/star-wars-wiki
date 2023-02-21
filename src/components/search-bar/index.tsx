@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { SearchResource } from "../../types";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export interface Props {
   onSubmit: (searchTerm: string, searchResource: SearchResource) => void;
@@ -19,34 +21,43 @@ const SearchBar = ({
     useState<SearchResource>("people");
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit(searchTerm, searchResource);
-      }}
-    >
-      <select
-        name="Search category"
-        onChange={(e) =>
-          setSearchResource(e.currentTarget.value as SearchResource)
-        }
-      >
-        <option value="people">People</option>
-        <option value="planets">Planets</option>
-        <option value="starships">Starships</option>
-      </select>
-      <input
-        name="Search query"
-        placeholder="Search for characters, planets and starships..."
-        onChange={(e) => setSearchTerm(e.currentTarget.value)}
-        disabled={isSearching}
-        value={searchTerm}
-      />
-      {hasResults && <button onClick={onClearSearch}>Clear search</button>}
-      <button onClick={() => onSubmit(searchTerm, searchResource)}>
-        Search
-      </button>
-    </form>
+    <>
+      <Form className="d-flex">
+        <Form.Control
+          type="search"
+          placeholder="Search wiki (min. 3 characters)"
+          className="me-2 search-bar"
+          aria-label="Search"
+          onChange={(e) =>
+            setSearchTerm(e.currentTarget.value as SearchResource)
+          }
+          value={searchTerm}
+        />
+        <Form.Select
+          onChange={(e) =>
+            setSearchResource(e.currentTarget.value as SearchResource)
+          }
+        >
+          <option value="people">People</option>
+          <option value="planets">Planets</option>
+          <option value="starships">Starships</option>
+        </Form.Select>
+
+        <Button
+          variant="primary"
+          onClick={() => onSubmit(searchTerm, searchResource)}
+          disabled={isSearching || searchTerm.length < 3}
+          className="search-button"
+        >
+          Search
+        </Button>
+        {hasResults && (
+          <Button variant="outline-secondary" onClick={onClearSearch}>
+            Clear Search
+          </Button>
+        )}
+      </Form>
+    </>
   );
 };
 

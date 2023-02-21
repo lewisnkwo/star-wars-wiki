@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import SearchBar from "./components/search-bar";
+import NavBar from "./components/nav-bar";
 import SearchResults from "./components/search-results";
 import Home from "./pages/home";
 import { Character, Planet, Starship, SearchResource } from "./types";
@@ -58,7 +58,7 @@ function App() {
 
   return (
     <div className="App">
-      <SearchBar
+      <NavBar
         onSubmit={(term, resource) => {
           setSearchTerm(term);
           setSearchResource(resource);
@@ -71,22 +71,24 @@ function App() {
           setStarships(undefined);
         }}
       />
-      {searching && <span>Searching...</span>}
-      {error && (
-        <span>Oops! Something went wrong while searching the wiki.</span>
-      )}
-      {hasSearchResults ? (
-        <div>
-          <h2>Search results:</h2>
-          <SearchResults
-            characters={characters}
-            planets={planets}
-            starships={starships}
-          />
-        </div>
-      ) : (
-        <Home />
-      )}
+      <main>
+        {searching && <span>Searching...</span>}
+        {error && (
+          <span>Oops! Something went wrong while searching the wiki.</span>
+        )}
+        {hasSearchResults ? (
+          <div>
+            <h2>Search results:</h2>
+            <SearchResults
+              characters={characters}
+              planets={planets}
+              starships={starships}
+            />
+          </div>
+        ) : (
+          <Home />
+        )}
+      </main>
     </div>
   );
 }
