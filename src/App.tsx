@@ -20,6 +20,11 @@ function App() {
   const [error, setError] = useState<boolean>(false);
   const [searching, setSearching] = useState<boolean>(false);
 
+  const hasSearchResults =
+    characters !== undefined ||
+    planets !== undefined ||
+    starships !== undefined;
+
   useEffect(() => {
     if (searchTerm !== undefined && searchTerm.length >= 3) {
       setError(false);
@@ -59,6 +64,7 @@ function App() {
           setSearchResource(resource);
         }}
         isSearching={searching}
+        hasResults={hasSearchResults}
         onClearSearch={() => {
           setCharacters(undefined);
           setPlanets(undefined);
@@ -69,9 +75,7 @@ function App() {
       {error && (
         <span>Oops! Something went wrong while searching the wiki.</span>
       )}
-      {characters !== undefined ||
-      planets !== undefined ||
-      starships !== undefined ? (
+      {hasSearchResults ? (
         <div>
           <h2>Search results:</h2>
           <SearchResults

@@ -12,6 +12,7 @@ const SearchResults = ({ characters, planets, starships }: Props) => (
       <>
         <hr />
         <h3>Characters</h3>
+        {characters.length === 0 && <p>No characters found.</p>}
         {characters !== undefined &&
           characters.map((c, i) => <p key={i}>{c.name}</p>)}
       </>
@@ -20,6 +21,7 @@ const SearchResults = ({ characters, planets, starships }: Props) => (
       <>
         <hr />
         <h3>Planets</h3>
+        {planets.length === 0 && <p>No planets found.</p>}
         {planets !== undefined &&
           planets.map((p, i) => <p key={i}>{p.name}</p>)}
       </>
@@ -28,6 +30,7 @@ const SearchResults = ({ characters, planets, starships }: Props) => (
       <>
         <hr />
         <h3>Starships</h3>
+        {starships.length === 0 && <p>No starships found.</p>}
         {starships !== undefined &&
           starships.map((s, i) => <p key={i}>{s.name}</p>)}
       </>

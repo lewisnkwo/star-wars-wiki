@@ -4,20 +4,25 @@ import { SearchResource } from "../../types";
 export interface Props {
   onSubmit: (searchTerm: string, searchResource: SearchResource) => void;
   isSearching: boolean;
+  hasResults: boolean;
   onClearSearch: () => void;
 }
 
-const SearchBar = ({ onSubmit, isSearching, onClearSearch }: Props) => {
+const SearchBar = ({
+  onSubmit,
+  isSearching,
+  onClearSearch,
+  hasResults,
+}: Props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [searchResource, setSearchResource] = useState<
-    SearchResource | undefined
-  >(undefined);
+  const [searchResource, setSearchResource] =
+    useState<SearchResource>("people");
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (searchResource !== undefined) onSubmit(searchTerm, searchResource);
+        onSubmit(searchTerm, searchResource);
       }}
     >
       <select
@@ -37,7 +42,10 @@ const SearchBar = ({ onSubmit, isSearching, onClearSearch }: Props) => {
         disabled={isSearching}
         value={searchTerm}
       />
-      <button onClick={onClearSearch}>Clear search</button>
+      {hasResults && <button onClick={onClearSearch}>Clear search</button>}
+      <button onClick={() => onSubmit(searchTerm, searchResource)}>
+        Search
+      </button>
     </form>
   );
 };

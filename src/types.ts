@@ -18,7 +18,7 @@ export interface Character {
 }
 
 export interface CharacterSettings {
-  isFavourite: boolean;
+  isFavourite?: boolean;
 }
 
 export interface Settings {

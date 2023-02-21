@@ -25,25 +25,35 @@ const Home = () => {
       {characters !== undefined && (
         <div>
           {characters.map((c, i) => (
-            <a href="/character" key={i}>
+            <div key={i}>
               <h3>{c.name}</h3>
               <p>View bio</p>
               <button
-                onClick={() =>
+                onClick={() => {
                   setCharacterSettings({
                     ...characterSettings,
-                    [c.name]: {
-                      isFavourite: !characterSettings[c.name].isFavourite,
-                    },
-                  })
-                }
+                    ...(!characterSettings[c.name]
+                      ? {
+                          [c.name]: {
+                            isFavourite: true,
+                          },
+                        }
+                      : {
+                          [c.name]: {
+                            ...characterSettings[c.name],
+                            isFavourite: !characterSettings[c.name].isFavourite,
+                          },
+                        }),
+                  });
+                }}
               >
-                {characterSettings[c.name].isFavourite
+                {!characterSettings[c.name] &&
+                characterSettings[c.name]?.isFavourite
                   ? "Unfavourite"
-                  : "Favourite"}
+                  : "Favourite"}{" "}
                 Character
               </button>
-            </a>
+            </div>
           ))}
         </div>
       )}
