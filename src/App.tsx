@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import SearchBar from "./components/search-bar";
 import { Character, Planet, SearchResource, Starship } from "./types";
@@ -24,12 +24,20 @@ function App() {
       setLoading(true);
 
       fetch(
-        `https://swapi.dev/api/${searchResource}/${encodeURIComponent(
+        `https://swapi.dev/api/${searchResource}?search=${encodeURIComponent(
           searchTerm
         )}`
       )
         .then((response) => response.json())
-        .then((result) => setCharacters(result.results))
+        .then(({ results }) => {
+          if (searchResource === "people") {
+            setCharacters(results);
+          } else if (searchResource === "planets") {
+            setPlanets(results);
+          } else if (searchResource === "starships") {
+            setStarships(results);
+          }
+        })
         .catch(() => setError(true))
         .finally(() => setLoading(false));
     }
@@ -44,9 +52,17 @@ function App() {
         }}
         isLoading={loading}
       />
-      {/* <header className="App-header">
-
-      </header> */}
+      {loading && <span>Searching...</span>}
+      {error && (
+        <span>Oops! Something went wrong while searching the wiki.</span>
+      )}
+      {(characters !== undefined ||
+        planets !== undefined ||
+        starships !== undefined) && (
+        <div>
+          <h2>Search results:</h2>
+        </div>
+      )}
     </div>
   );
 }
