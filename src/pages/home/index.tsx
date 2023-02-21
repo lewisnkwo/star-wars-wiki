@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { Character, Settings } from "../../types";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import { Button } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 
 const Home = () => {
   const [characters, setCharacters] = useState<Character[] | undefined>(
@@ -27,6 +24,13 @@ const Home = () => {
   return (
     <>
       <h1 className="title">Welcome to the Cytora Star Wars Wiki!</h1>
+      <h3 className="sub-title">
+        You can search by Star Wars characters, their starships & home planets.
+      </h3>
+      {loading && <span>Loading...</span>}
+      {error && (
+        <span>Oops! Something went wrong while loading the characters.</span>
+      )}
       <Row xs={1} md={2} className="g-4">
         {characters !== undefined &&
           characters.map((c, i) => (
@@ -68,10 +72,6 @@ const Home = () => {
             </Col>
           ))}
       </Row>
-      {loading && <span>Loading...</span>}
-      {error && (
-        <span>Oops! Something went wrong while loading the characters.</span>
-      )}
     </>
   );
 };

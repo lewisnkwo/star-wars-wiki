@@ -6,8 +6,8 @@ main {
   padding: 15px;
 }
 
-.title {
-  margin-top: 10px;
+.title,
+.sub-title {
   margin-bottom: 10px;
 }
 
