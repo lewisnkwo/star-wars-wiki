@@ -3,10 +3,10 @@ import { SearchResource } from "../../types";
 
 export interface Props {
   onSubmit: (searchTerm: string, searchResource: SearchResource) => void;
-  isLoading: boolean;
+  isSearching: boolean;
 }
 
-const SearchBar = ({ onSubmit, isLoading }: Props) => {
+const SearchBar = ({ onSubmit, isSearching }: Props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResource, setSearchResource] = useState<
     SearchResource | undefined
@@ -33,7 +33,7 @@ const SearchBar = ({ onSubmit, isLoading }: Props) => {
         name="Search query"
         placeholder="Search for characters, planets and starships..."
         onChange={(e) => setSearchTerm(e.currentTarget.value)}
-        disabled={isLoading}
+        disabled={isSearching}
         value={searchTerm}
       />
     </form>
