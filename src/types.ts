@@ -16,3 +16,7 @@ export interface Character {
   edited: string;
   url: string;
 }
+
+export interface CharacterSettings {
+  isFavourite: boolean;
+}
