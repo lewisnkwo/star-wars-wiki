@@ -21,6 +21,10 @@ export interface CharacterSettings {
   isFavourite: boolean;
 }
 
+export interface Settings {
+  [x: string]: CharacterSettings;
+}
+
 export interface Planet {
   name: string;
   rotation_period: string;

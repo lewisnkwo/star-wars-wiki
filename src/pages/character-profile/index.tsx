@@ -51,6 +51,7 @@ const CharacterProfile = ({
           <hr />
           {/* replace with a star icon */}
           <button onClick={() => onFavourite(!characterSettings.isFavourite)}>
+            {characterSettings.isFavourite ? "Unfavourite" : "Favourite"}
             Favourite this character
           </button>
         </div>
