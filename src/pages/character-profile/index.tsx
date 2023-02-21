@@ -38,7 +38,7 @@ const CharacterProfile = ({
           <p>
             <strong>Home planet:</strong>
           </p>
-          <span>{character.homeworld}</span>
+          <a href={character.homeworld}>{character.homeworld}</a>
           <p>
             <strong>Starships:</strong>
           </p>
