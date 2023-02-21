@@ -32,8 +32,8 @@ const CharacterProfile = ({
       {character !== undefined && (
         <div>
           <h3>
-            Name: {character.name} {/* replace with a star icon */}
-            {characterSettings.isFavourite ? "(A favourite)" : ""}
+            Name: {character.name}
+            {characterSettings.isFavourite ? "(Favourite)" : ""}
           </h3>
           <p>
             <strong>Home planet:</strong>
@@ -49,7 +49,6 @@ const CharacterProfile = ({
               </span>
             ))}
           <hr />
-          {/* replace with a star icon */}
           <button onClick={() => onFavourite(!characterSettings.isFavourite)}>
             {characterSettings.isFavourite ? "Unfavourite" : "Favourite"}
             Favourite this character

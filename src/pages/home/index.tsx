@@ -47,8 +47,8 @@ const Home = () => {
                   });
                 }}
               >
-                {!characterSettings[c.name] &&
-                characterSettings[c.name]?.isFavourite
+                {characterSettings[c.name] &&
+                characterSettings[c.name]?.isFavourite === true
                   ? "Unfavourite"
                   : "Favourite"}{" "}
                 Character
