@@ -4,9 +4,10 @@ import { SearchResource } from "../../types";
 export interface Props {
   onSubmit: (searchTerm: string, searchResource: SearchResource) => void;
   isSearching: boolean;
+  onClearSearch: () => void;
 }
 
-const SearchBar = ({ onSubmit, isSearching }: Props) => {
+const SearchBar = ({ onSubmit, isSearching, onClearSearch }: Props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResource, setSearchResource] = useState<
     SearchResource | undefined
@@ -36,6 +37,7 @@ const SearchBar = ({ onSubmit, isSearching }: Props) => {
         disabled={isSearching}
         value={searchTerm}
       />
+      <button onClick={onClearSearch}>Clear search</button>
     </form>
   );
 };

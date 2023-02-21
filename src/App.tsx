@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import SearchBar from "./components/search-bar";
+import SearchResults from "./components/search-results";
+import Home from "./pages/home";
 import { Character, Planet, Starship, SearchResource } from "./types";
 
 function App() {
@@ -57,41 +59,29 @@ function App() {
           setSearchResource(resource);
         }}
         isSearching={searching}
+        onClearSearch={() => {
+          setCharacters(undefined);
+          setPlanets(undefined);
+          setStarships(undefined);
+        }}
       />
       {searching && <span>Searching...</span>}
       {error && (
         <span>Oops! Something went wrong while searching the wiki.</span>
       )}
-      {(characters !== undefined ||
-        planets !== undefined ||
-        starships !== undefined) && (
+      {characters !== undefined ||
+      planets !== undefined ||
+      starships !== undefined ? (
         <div>
           <h2>Search results:</h2>
-          {characters !== undefined && (
-            <>
-              <hr />
-              <h3>Characters</h3>
-              {characters !== undefined &&
-                characters.map((c, i) => <p key={i}>{c.name}</p>)}
-            </>
-          )}
-          {planets !== undefined && (
-            <>
-              <hr />
-              <h3>Planets</h3>
-              {planets !== undefined &&
-                planets.map((p, i) => <p key={i}>{p.name}</p>)}
-            </>
-          )}
-          {starships !== undefined && (
-            <>
-              <hr />
-              <h3>Starships</h3>
-              {starships !== undefined &&
-                starships.map((s, i) => <p key={i}>{s.name}</p>)}
-            </>
-          )}
+          <SearchResults
+            characters={characters}
+            planets={planets}
+            starships={starships}
+          />
         </div>
+      ) : (
+        <Home />
       )}
     </div>
   );
