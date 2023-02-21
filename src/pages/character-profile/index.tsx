@@ -29,6 +29,10 @@ const CharacterProfile = ({
 
   return (
     <>
+      {loading && <span>Loading...</span>}
+      {error && (
+        <span>Oops! Something went wrong while loading the character.</span>
+      )}
       {character !== undefined && (
         <div>
           <h3>
@@ -36,28 +40,27 @@ const CharacterProfile = ({
             {characterSettings.isFavourite ? "(Favourite)" : ""}
           </h3>
           <p>
-            <strong>Home planet:</strong>
+            <strong>Home planet:</strong>{" "}
+            <a href={character.homeworld}>{character.homeworld}</a>
           </p>
-          <a href={character.homeworld}>{character.homeworld}</a>
           <p>
             <strong>Starships:</strong>
           </p>
-          {character.starships.length > 0 &&
-            character.starships.map((starship) => (
-              <span>
-                <a href={starship}>{starship}</a>
-              </span>
-            ))}
+          {character.starships.length > 0 && (
+            <ul>
+              {character.starships.map((starship, i) => (
+                <li key={i}>
+                  <a href={starship}>Starship {i + 1}</a>
+                </li>
+              ))}
+            </ul>
+          )}
           <hr />
           <button onClick={() => onFavourite(!characterSettings.isFavourite)}>
-            {characterSettings.isFavourite ? "Unfavourite" : "Favourite"}
-            Favourite this character
+            {characterSettings.isFavourite ? "Unfavourite" : "Favourite"} this
+            character
           </button>
         </div>
-      )}
-      {loading && <span>Loading...</span>}
-      {error && (
-        <span>Oops! Something went wrong while loading the character.</span>
       )}
     </>
   );
