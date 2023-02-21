@@ -28,9 +28,10 @@ const SearchBar = ({
           placeholder="Search wiki (min. 3 characters)"
           className="me-2 search-bar"
           aria-label="Search"
-          onChange={(e) =>
-            setSearchTerm(e.currentTarget.value as SearchResource)
-          }
+          onChange={(e) => {
+            e.preventDefault();
+            setSearchTerm(e.currentTarget.value as SearchResource);
+          }}
           value={searchTerm}
         />
         <Form.Select

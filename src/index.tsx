@@ -6,12 +6,33 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ErrorPage from "./error-page";
+import CharacterProfile from "./pages/character-profile";
+import PlanetDetail from "./pages/planet";
+import StarshipDetail from "./pages/starship";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/character",
+    element: (
+      <CharacterProfile
+        profileUrl="https://swapi.dev/api/people/1"
+        characterSettings={{}}
+        onFavourite={() => console.log("")}
+      />
+    ),
+  },
+  {
+    path: "/planet",
+    element: <PlanetDetail planetUrl="https://swapi.dev/api/planets/3" />,
+  },
+  {
+    path: "/starship",
+    element: <StarshipDetail starshipUrl="https://swapi.dev/api/starships/9" />,
   },
 ]);
 

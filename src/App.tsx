@@ -77,14 +77,14 @@ function App() {
           <span>Oops! Something went wrong while searching the wiki.</span>
         )}
         {hasSearchResults ? (
-          <div>
+          <>
             <h2>Search results:</h2>
             <SearchResults
               characters={characters}
               planets={planets}
               starships={starships}
             />
-          </div>
+          </>
         ) : (
           <Home />
         )}

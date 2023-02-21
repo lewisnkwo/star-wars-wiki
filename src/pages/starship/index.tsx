@@ -33,14 +33,15 @@ const StarshipDetail = ({ starshipUrl }: Props) => {
           <p>
             <strong>Pilots:</strong>
           </p>
-          {starship.pilots.length > 0 &&
-            starship.pilots.map((pilot) => (
-              <span>
-                <a href={pilot}>{pilot}</a>
-              </span>
-            ))}
         </div>
       )}
+      {starship !== undefined &&
+        starship.pilots.length > 0 &&
+        starship.pilots.map((pilot) => (
+          <span>
+            <a href={pilot}>{pilot}</a>
+          </span>
+        ))}
       {loading && <span>Loading...</span>}
       {error && (
         <span>

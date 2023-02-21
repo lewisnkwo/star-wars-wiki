@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Character, CharacterSettings } from "../../types";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   profileUrl: string;
@@ -12,6 +14,7 @@ const CharacterProfile = ({
   characterSettings,
   onFavourite,
 }: Props) => {
+  const navigate = useNavigate();
   const [character, setCharacter] = useState<Character | undefined>(undefined);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,41 +31,58 @@ const CharacterProfile = ({
   }, [profileUrl]);
 
   return (
-    <>
+    <Container>
+      <h1>Character Profile</h1>
       {loading && <span>Loading...</span>}
       {error && (
         <span>Oops! Something went wrong while loading the character.</span>
       )}
       {character !== undefined && (
-        <div>
-          <h3>
-            Name: {character.name}
-            {characterSettings.isFavourite ? "(Favourite)" : ""}
-          </h3>
-          <p>
-            <strong>Home planet:</strong>{" "}
-            <a href={character.homeworld}>{character.homeworld}</a>
-          </p>
-          <p>
-            <strong>Starships:</strong>
-          </p>
-          {character.starships.length > 0 && (
-            <ul>
-              {character.starships.map((starship, i) => (
-                <li key={i}>
-                  <a href={starship}>Starship {i + 1}</a>
-                </li>
-              ))}
-            </ul>
-          )}
-          <hr />
-          <button onClick={() => onFavourite(!characterSettings.isFavourite)}>
-            {characterSettings.isFavourite ? "Unfavourite" : "Favourite"} this
-            character
-          </button>
-        </div>
+        <Row>
+          <Col>
+            <Card>
+              <Card.Body>
+                <Card.Title>{character.name}</Card.Title>
+                <Card.Text>
+                  <p>
+                    <Button onClick={() => navigate("/planet")}>
+                      Go to Home planet
+                    </Button>
+                  </p>
+                  <p>
+                    <strong>Starships:</strong>
+                  </p>
+                  {character.starships.length > 0 && (
+                    <>
+                      {character.starships.map((_, i) => (
+                        <Button
+                          variant="outline-primary"
+                          onClick={() => navigate("/starship")}
+                          key={i}
+                          className="margin-right-small"
+                        >
+                          Starship {i + 1}
+                        </Button>
+                      ))}
+                    </>
+                  )}
+                </Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <Button
+                  variant="outline-info"
+                  onClick={() => onFavourite(!characterSettings.isFavourite)}
+                >
+                  {characterSettings.isFavourite ? "Unfavourite" : "Favourite"}{" "}
+                  this character
+                </Button>
+              </Card.Footer>
+            </Card>
+          </Col>
+          <Col />
+        </Row>
       )}
-    </>
+    </Container>
   );
 };
 

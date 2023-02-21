@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Character, Settings } from "../../types";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [characters, setCharacters] = useState<Character[] | undefined>(
     undefined
   );
@@ -38,7 +40,9 @@ const Home = () => {
               <Card>
                 <Card.Body>
                   <Card.Title>{c.name}</Card.Title>
-                  <Button variant="info">View Profile</Button>
+                  <Button variant="info" onClick={() => navigate("/character")}>
+                    View Profile
+                  </Button>
                 </Card.Body>
                 <Card.Footer>
                   <Button
