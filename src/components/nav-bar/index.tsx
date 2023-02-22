@@ -11,7 +11,7 @@ const NavBar = () => {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand onClick={() => navigate("/")}>
-          Star Wars Wiki
+          Star Wars Cytora Wiki
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

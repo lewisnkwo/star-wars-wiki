@@ -91,6 +91,12 @@ const Home = () => {
             </Col>
           ))}
       </Row>
+      <div className="created-by">
+        Created by Lewis Nkwo.{" "}
+        <a href="https://swapi.dev" target="_blank" rel="noopener noreferrer">
+          Powered by SWAPI
+        </a>
+      </div>
     </>
   );
 };
