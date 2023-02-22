@@ -10,7 +10,6 @@ const SearchResults = ({ characters, planets, starships }: Props) => (
   <div>
     {characters !== undefined && (
       <>
-        <hr />
         <h3>Characters</h3>
         {characters.length === 0 && <p>No characters found.</p>}
         {characters !== undefined &&
@@ -19,7 +18,6 @@ const SearchResults = ({ characters, planets, starships }: Props) => (
     )}
     {planets !== undefined && (
       <>
-        <hr />
         <h3>Planets</h3>
         {planets.length === 0 && <p>No planets found.</p>}
         {planets !== undefined &&
@@ -28,7 +26,6 @@ const SearchResults = ({ characters, planets, starships }: Props) => (
     )}
     {starships !== undefined && (
       <>
-        <hr />
         <h3>Starships</h3>
         {starships.length === 0 && <p>No starships found.</p>}
         {starships !== undefined &&

@@ -5,17 +5,9 @@ import Button from "react-bootstrap/Button";
 
 export interface Props {
   onSubmit: (searchTerm: string, searchResource: SearchResource) => void;
-  isSearching: boolean;
-  hasResults: boolean;
-  onClearSearch: () => void;
 }
 
-const SearchBar = ({
-  onSubmit,
-  isSearching,
-  onClearSearch,
-  hasResults,
-}: Props) => {
+const SearchBar = ({ onSubmit }: Props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResource, setSearchResource] =
     useState<SearchResource>("people");
@@ -47,16 +39,16 @@ const SearchBar = ({
         <Button
           variant="primary"
           onClick={() => onSubmit(searchTerm, searchResource)}
-          disabled={isSearching || searchTerm.length < 3}
+          disabled={searchTerm.length < 3}
           className="search-button"
         >
           Search
         </Button>
-        {hasResults && (
+        {/* {hasResults && (
           <Button variant="outline-secondary" onClick={onClearSearch}>
             Clear Search
           </Button>
-        )}
+        )} */}
       </Form>
     </>
   );
