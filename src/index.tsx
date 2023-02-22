@@ -7,7 +7,7 @@ import App from "./App";
 import ErrorPage from "./error-page";
 import Home from "./pages/home";
 import FavouriteCharacters from "./pages/favourite-characters";
-import { CharacterSettingsProvider } from "./character-settings";
+import { CharacterSettingsProvider } from "./settings/character-settings";
 import CharacterProfile from "./pages/character-profile";
 import PlanetDetail from "./pages/planet";
 import StarshipDetail from "./pages/starship";

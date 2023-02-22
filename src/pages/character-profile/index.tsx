@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Character } from "../../types";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
-import { CharacterSettingsContext } from "../../character-settings";
+import { CharacterSettingsContext } from "../../settings/character-settings";
 
 const CharacterProfile = () => {
   const settings = useContext(CharacterSettingsContext);

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Character } from "../../types";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { CharacterSettingsContext } from "../../character-settings";
+import { CharacterSettingsContext } from "../../settings/character-settings";
 
 const Home = () => {
   const navigate = useNavigate();

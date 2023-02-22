@@ -1,5 +1,5 @@
 import { useState, createContext } from "react";
-import { Settings } from "./types";
+import { Settings } from "../types";
 
 interface Props {
   children: JSX.Element;
