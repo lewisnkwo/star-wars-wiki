@@ -31,7 +31,7 @@ const FavouriteCharacters = () => {
         {favouriteList
           .filter((f) => f.value)
           .map((fav, i) => (
-            <p key={i}>
+            <div key={i}>
               <span>{fav.name}</span>
               <button
                 onClick={() => {
@@ -55,7 +55,7 @@ const FavouriteCharacters = () => {
               >
                 Remove
               </button>
-            </p>
+            </div>
           ))}
       </>
     );

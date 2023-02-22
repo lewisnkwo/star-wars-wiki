@@ -39,13 +39,13 @@ const PlanetDetail = () => {
               <Card.Body>
                 <Card.Title>{planet.name}</Card.Title>
                 <Card.Text>
-                  <p>
+                  <span>
                     <strong>Terrain:</strong>
-                  </p>
+                  </span>
                   <span>{planet.terrain}</span>
-                  <p>
+                  <span>
                     <strong>Population:</strong>
-                  </p>
+                  </span>
                   <span>{planet.population}</span>
                 </Card.Text>
               </Card.Body>

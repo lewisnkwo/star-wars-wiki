@@ -44,11 +44,6 @@ const SearchBar = ({ onSubmit }: Props) => {
         >
           Search
         </Button>
-        {/* {hasResults && (
-          <Button variant="outline-secondary" onClick={onClearSearch}>
-            Clear Search
-          </Button>
-        )} */}
       </Form>
     </>
   );

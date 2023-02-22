@@ -39,15 +39,29 @@ const StarshipDetail = () => {
               <Card.Body>
                 <Card.Title>{starship.name}</Card.Title>
                 <Card.Text>
-                  <p>
+                  <span>
                     <strong>Model:</strong>
-                  </p>
+                  </span>
                   <span>{starship.model}</span>
-                  <p>
+                  <span>
                     <strong>Pilots:</strong>
-                  </p>
+                  </span>
                   {starship.pilots.length > 0 &&
-                    starship.pilots.map((pilot) => <span>{pilot}</span>)}
+                    starship.pilots.map((pilot, i) => (
+                      <Button
+                        key={i}
+                        className="margin-right-small"
+                        onClick={() =>
+                          navigate("/character", {
+                            state: {
+                              url: pilot,
+                            },
+                          })
+                        }
+                      >
+                        Pilot {i + 1}
+                      </Button>
+                    ))}
                 </Card.Text>
               </Card.Body>
               <Card.Footer>
