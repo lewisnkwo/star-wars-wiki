@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Planet } from "../../types";
 
-interface Props {
-  planetUrl: string;
-}
+const PlanetDetail = () => {
+  const location = useLocation();
+  const { url } = location.state;
+  const navigate = useNavigate();
 
-const PlanetDetail = ({ planetUrl }: Props) => {
   const [planet, setPlanet] = useState<Planet | undefined>(undefined);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -14,35 +16,50 @@ const PlanetDetail = ({ planetUrl }: Props) => {
     setError(false);
     setLoading(true);
 
-    fetch(planetUrl)
+    fetch(url)
       .then((response) => response.json())
       .then((result) => setPlanet(result))
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, [planetUrl]);
+  }, [url]);
 
   return (
-    <>
-      {planet !== undefined && (
-        <div>
-          <h3>Planet name: {planet.name}</h3>
-          <p>
-            <strong>Terrain:</strong>
-          </p>
-          <span>{planet.terrain}</span>
-          <p>
-            <strong>Population:</strong>
-          </p>
-          <span>{planet.population}</span>
-        </div>
-      )}
+    <Container>
+      <h1>Planet Info</h1>
       {loading && <span>Loading...</span>}
       {error && (
         <span>
           Oops! Something went wrong while loading the planet information.
         </span>
       )}
-    </>
+      {planet !== undefined && (
+        <Row>
+          <Col>
+            <Card>
+              <Card.Body>
+                <Card.Title>{planet.name}</Card.Title>
+                <Card.Text>
+                  <p>
+                    <strong>Terrain:</strong>
+                  </p>
+                  <span>{planet.terrain}</span>
+                  <p>
+                    <strong>Population:</strong>
+                  </p>
+                  <span>{planet.population}</span>
+                </Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <Button variant="secondary" onClick={() => navigate(-1)}>
+                  Go back
+                </Button>
+              </Card.Footer>
+            </Card>
+          </Col>
+          <Col />
+        </Row>
+      )}
+    </Container>
   );
 };
 

@@ -60,7 +60,7 @@ const FavouriteCharacters = () => {
       </>
     );
   } else {
-    return <></>;
+    return <span>Could not load settings.</span>;
   }
 };
 

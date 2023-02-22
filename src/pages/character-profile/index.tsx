@@ -40,8 +40,20 @@ const CharacterProfile = () => {
                 <Card.Title>{character.name}</Card.Title>
                 <Card.Text>
                   <p>
-                    <Button onClick={() => navigate("/planet")}>
+                    <Button
+                      className="margin-right-small"
+                      onClick={() =>
+                        navigate("/planet", {
+                          state: {
+                            url: character.homeworld,
+                          },
+                        })
+                      }
+                    >
                       Go to Home planet
+                    </Button>
+                    <Button variant="secondary" onClick={() => navigate(-1)}>
+                      Go back
                     </Button>
                   </p>
                   <p>
@@ -49,10 +61,16 @@ const CharacterProfile = () => {
                   </p>
                   {character.starships.length > 0 && (
                     <>
-                      {character.starships.map((_, i) => (
+                      {character.starships.map((s, i) => (
                         <Button
                           variant="outline-primary"
-                          onClick={() => navigate("/starship")}
+                          onClick={() =>
+                            navigate("/starship", {
+                              state: {
+                                url: s,
+                              },
+                            })
+                          }
                           key={i}
                           className="margin-right-small"
                         >

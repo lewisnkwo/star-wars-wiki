@@ -9,6 +9,8 @@ import Home from "./pages/home";
 import FavouriteCharacters from "./pages/favourite-characters";
 import { CharacterSettingsProvider } from "./character-settings";
 import CharacterProfile from "./pages/character-profile";
+import PlanetDetail from "./pages/planet";
+import StarshipDetail from "./pages/starship";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -23,6 +25,8 @@ root.render(
             <Route index element={<Home />} />
             <Route path="/character" element={<CharacterProfile />} />
             <Route path="/favourites" element={<FavouriteCharacters />} />
+            <Route path="/planet" element={<PlanetDetail />} />
+            <Route path="/starship" element={<StarshipDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
