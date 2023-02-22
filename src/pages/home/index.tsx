@@ -12,7 +12,7 @@ const Home = () => {
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const characterSettingsContext = useContext(CharacterSettingsContext);
+  const settings = useContext(CharacterSettingsContext);
 
   useEffect(() => {
     setError(false);
@@ -42,7 +42,16 @@ const Home = () => {
               <Card>
                 <Card.Body>
                   <Card.Title>{c.name}</Card.Title>
-                  <Button variant="info" onClick={() => navigate("/character")}>
+                  <Button
+                    variant="info"
+                    onClick={() =>
+                      navigate("/character", {
+                        state: {
+                          url: c.url,
+                        },
+                      })
+                    }
+                  >
                     View Profile
                   </Button>
                 </Card.Body>
@@ -50,12 +59,10 @@ const Home = () => {
                   <Button
                     variant="outline-info"
                     onClick={() => {
-                      if (characterSettingsContext !== undefined) {
-                        characterSettingsContext.setCharacterSettings({
-                          ...characterSettingsContext.characterSettings,
-                          ...(!characterSettingsContext.characterSettings[
-                            c.name
-                          ]
+                      if (settings !== undefined) {
+                        settings.setCharacterSettings({
+                          ...settings.characterSettings,
+                          ...(!settings.characterSettings[c.name]
                             ? {
                                 [c.name]: {
                                   isFavourite: true,
@@ -63,23 +70,19 @@ const Home = () => {
                               }
                             : {
                                 [c.name]: {
-                                  ...characterSettingsContext.characterSettings[
-                                    c.name
-                                  ],
+                                  ...settings.characterSettings[c.name],
                                   isFavourite:
-                                    !characterSettingsContext.characterSettings[
-                                      c.name
-                                    ].isFavourite,
+                                    !settings.characterSettings[c.name]
+                                      .isFavourite,
                                 },
                               }),
                         });
                       }
                     }}
                   >
-                    {characterSettingsContext !== undefined &&
-                    characterSettingsContext.characterSettings[c.name] &&
-                    characterSettingsContext.characterSettings[c.name]
-                      ?.isFavourite === true
+                    {settings !== undefined &&
+                    settings.characterSettings[c.name] &&
+                    settings.characterSettings[c.name]?.isFavourite === true
                       ? "Unfavourite"
                       : "Favourite"}
                   </Button>

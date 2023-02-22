@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
-import { Character, CharacterSettings } from "../../types";
+import { useContext, useEffect, useState } from "react";
+import { Character } from "../../types";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { CharacterSettingsContext } from "../../character-settings";
 
-interface Props {
-  profileUrl: string;
-  characterSettings: CharacterSettings;
-  onFavourite: (v: boolean) => void;
-}
-
-const CharacterProfile = ({
-  profileUrl,
-  characterSettings,
-  onFavourite,
-}: Props) => {
+const CharacterProfile = () => {
+  const settings = useContext(CharacterSettingsContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { url } = location.state;
+
   const [character, setCharacter] = useState<Character | undefined>(undefined);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,12 +18,12 @@ const CharacterProfile = ({
     setError(false);
     setLoading(true);
 
-    fetch(profileUrl)
+    fetch(url)
       .then((response) => response.json())
       .then((result) => setCharacter(result))
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, [profileUrl]);
+  }, [url]);
 
   return (
     <Container>
@@ -71,9 +66,34 @@ const CharacterProfile = ({
               <Card.Footer>
                 <Button
                   variant="outline-info"
-                  onClick={() => onFavourite(!characterSettings.isFavourite)}
+                  onClick={() => {
+                    if (settings !== undefined) {
+                      settings.setCharacterSettings({
+                        ...settings.characterSettings,
+                        ...(!settings.characterSettings[character.name]
+                          ? {
+                              [character.name]: {
+                                isFavourite: true,
+                              },
+                            }
+                          : {
+                              [character.name]: {
+                                ...settings.characterSettings[character.name],
+                                isFavourite:
+                                  !settings.characterSettings[character.name]
+                                    .isFavourite,
+                              },
+                            }),
+                      });
+                    }
+                  }}
                 >
-                  {characterSettings.isFavourite ? "Unfavourite" : "Favourite"}{" "}
+                  {settings !== undefined &&
+                  settings.characterSettings[character.name] &&
+                  settings.characterSettings[character.name]?.isFavourite ===
+                    true
+                    ? "Unfavourite"
+                    : "Favourite"}{" "}
                   this character
                 </Button>
               </Card.Footer>
