@@ -1,29 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Character } from "../../types";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { CharacterSettingsContext } from "../../settings/character-settings";
+import { useCharacters } from "../../swr";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [characters, setCharacters] = useState<Character[] | undefined>(
-    undefined
-  );
-  const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-
   const settings = useContext(CharacterSettingsContext);
 
-  useEffect(() => {
-    setError(false);
-    setLoading(true);
-
-    fetch("https://swapi.dev/api/people")
-      .then((response) => response.json())
-      .then((result) => setCharacters(result.results))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+  const { loading, error, characters } = useCharacters();
 
   return (
     <>

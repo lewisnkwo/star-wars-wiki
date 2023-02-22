@@ -55,6 +55,8 @@ const CharacterProfile = () => {
                     Go back
                   </Button>
                 </p>
+                <p>Birth year: {character.birth_year}</p>
+                <p>Gender: {character.gender}</p>
                 <p>Starships:</p>
                 <Card.Text>
                   {character.starships.length > 0 && (
