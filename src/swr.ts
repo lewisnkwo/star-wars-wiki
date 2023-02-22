@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR from "swr/immutable";
 import { Character } from "./types";
 
 const fetcher = (input: RequestInfo, init?: RequestInit) =>
