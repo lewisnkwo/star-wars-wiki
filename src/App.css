@@ -20,6 +20,10 @@ main {
   margin-left: 10px;
 }
 
+.margin-bottom-small {
+  margin-bottom: 10px;
+}
+
 .margin-right-small {
   margin-right: 10px;
 }

@@ -37,17 +37,24 @@ const PlanetDetail = () => {
           <Col>
             <Card>
               <Card.Body>
-                <Card.Title>{planet.name}</Card.Title>
-                <Card.Text>
+                <h4>{planet.name}</h4>
+                <p>
                   <span>
-                    <strong>Terrain:</strong>
+                    <strong>Terrain:</strong> {planet.terrain}
                   </span>
-                  <span>{planet.terrain}</span>
+                </p>
+                <p>
                   <span>
-                    <strong>Population:</strong>
+                    <strong>Population: </strong>
+                    {planet.population}
                   </span>
-                  <span>{planet.population}</span>
-                </Card.Text>
+                </p>
+                <p>
+                  <span>
+                    <strong>Gravity: </strong>
+                    {planet.gravity}
+                  </span>
+                </p>
               </Card.Body>
               <Card.Footer>
                 <Button variant="secondary" onClick={() => navigate(-1)}>

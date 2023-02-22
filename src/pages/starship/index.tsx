@@ -37,32 +37,41 @@ const StarshipDetail = () => {
           <Col>
             <Card>
               <Card.Body>
-                <Card.Title>{starship.name}</Card.Title>
-                <Card.Text>
+                <h4>{starship.name}</h4>
+                <p>
                   <span>
-                    <strong>Model:</strong>
+                    <strong>Model: {starship.model}</strong>
                   </span>
-                  <span>{starship.model}</span>
+                </p>
+                <p>
                   <span>
-                    <strong>Pilots:</strong>
+                    <strong>Manufacturer: {starship.manufacturer}</strong>
                   </span>
-                  {starship.pilots.length > 0 &&
-                    starship.pilots.map((pilot, i) => (
-                      <Button
-                        key={i}
-                        className="margin-right-small"
-                        onClick={() =>
-                          navigate("/character", {
-                            state: {
-                              url: pilot,
-                            },
-                          })
-                        }
-                      >
-                        Pilot {i + 1}
-                      </Button>
-                    ))}
-                </Card.Text>
+                </p>
+                <p>
+                  <span>
+                    <strong>Crew: {starship.crew}</strong>
+                  </span>
+                </p>
+                <span className="margin-right-small">
+                  <strong>Pilots:</strong>
+                </span>
+                {starship.pilots.length > 0 &&
+                  starship.pilots.map((pilot, i) => (
+                    <Button
+                      key={i}
+                      className="margin-right-small"
+                      onClick={() =>
+                        navigate("/character", {
+                          state: {
+                            url: pilot,
+                          },
+                        })
+                      }
+                    >
+                      Pilot {i + 1}
+                    </Button>
+                  ))}
               </Card.Body>
               <Card.Footer>
                 <Button variant="secondary" onClick={() => navigate(-1)}>

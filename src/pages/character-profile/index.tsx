@@ -38,7 +38,7 @@ const CharacterProfile = () => {
             <Card>
               <Card.Body>
                 <Card.Title>{character.name}</Card.Title>
-                <Card.Text>
+                <p>
                   <Button
                     className="margin-right-small"
                     onClick={() =>
@@ -54,9 +54,9 @@ const CharacterProfile = () => {
                   <Button variant="secondary" onClick={() => navigate(-1)}>
                     Go back
                   </Button>
-                  <span>
-                    <strong>Starships:</strong>
-                  </span>
+                </p>
+                <p>Starships:</p>
+                <Card.Text>
                   {character.starships.length > 0 && (
                     <>
                       {character.starships.map((s, i) => (
